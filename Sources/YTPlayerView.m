@@ -632,6 +632,10 @@ createWebViewWithConfiguration:(WKWebViewConfiguration *)configuration
 }
 
 - (BOOL)handleHttpNavigationToUrl:(NSURL *)url {
+  if ([[[url.path stringByReplacingOccurrencesOfString:@"/" withString:@""] lowercaseString] isEqualToString:@"ytscframe"]) {
+    return NO;
+  }
+    
   // When loading the webView for the first time, webView tries loading the originURL
   // since it is set as the webView.baseURL.
   // In that case we want to let it load itself in the webView instead of trying
